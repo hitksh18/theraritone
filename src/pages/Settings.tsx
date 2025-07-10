@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Bell, Shield, User, MapPin, Edit } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -93,7 +92,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+    <div className="min-h-screen" style={{ background: 'var(--main-bg)' }}>
       <Navbar 
         onSearchOpen={() => {}}
         onCartOpen={() => {}}
@@ -104,45 +103,40 @@ const Settings = () => {
       <div className="pt-20 max-w-4xl mx-auto px-4 py-8">
         <div className="space-y-6">
           {/* Personal Information */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
-            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
-          >
-            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
+          <div className="modern-card rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <User className="mr-2" size={20} />
               Personal Information
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <Label htmlFor="name" className="text-[rgb(236,223,204)]">Full Name</Label>
+                <Label htmlFor="name" className="text-[var(--text-primary)]">Full Name</Label>
                 <Input
                   id="name"
                   value={personalInfo.name}
                   onChange={(e) => setPersonalInfo({...personalInfo, name: e.target.value})}
-                  className="mt-1 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)]"
+                  className="mt-1 modern-input"
                 />
               </div>
               
               <div>
-                <Label htmlFor="email" className="text-[rgb(236,223,204)]">Email</Label>
+                <Label htmlFor="email" className="text-[var(--text-primary)]">Email</Label>
                 <Input
                   id="email"
                   value={personalInfo.email}
                   disabled
-                  className="mt-1 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)]"
+                  className="mt-1 modern-input opacity-50"
                 />
               </div>
               
               <div>
-                <Label htmlFor="phone" className="text-[rgb(236,223,204)]">Phone Number</Label>
+                <Label htmlFor="phone" className="text-[var(--text-primary)]">Phone Number</Label>
                 <Input
                   id="phone"
                   value={personalInfo.phone}
                   onChange={(e) => setPersonalInfo({...personalInfo, phone: e.target.value})}
-                  className="mt-1 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)]"
+                  className="mt-1 modern-input"
                 />
               </div>
             </div>
@@ -150,58 +144,35 @@ const Settings = () => {
             <div className="flex space-x-4">
               <Button 
                 onClick={handleSavePersonalInfo} 
-                className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] border-0"
-                style={{ 
-                  backgroundColor: 'rgb(236, 223, 204)', 
-                  color: 'rgb(24, 28, 20)',
-                  fontWeight: '500'
-                }}
+                className="btn-primary"
               >
                 Save Changes
               </Button>
               <Button 
                 onClick={handleChangePassword} 
-                variant="outline" 
-                className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
-                style={{ 
-                  borderColor: 'rgb(105, 117, 101)',
-                  color: 'rgb(236, 223, 204)',
-                  backgroundColor: 'transparent'
-                }}
+                className="btn-secondary"
               >
                 Change Password
               </Button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Delivery Addresses */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
-            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
-          >
-            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
+          <div className="modern-card rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <MapPin className="mr-2" size={20} />
               Delivery Addresses
             </h2>
             
             <div className="space-y-4">
               {addresses.map((address) => (
-                <div key={address.id} className="border border-[rgb(105,117,101)] rounded-lg p-4">
+                <div key={address.id} className="border border-[var(--border-color)] rounded-lg p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <span className="font-medium text-[rgb(236,223,204)]">{address.type}</span>
+                        <span className="font-medium text-[var(--text-primary)]">{address.type}</span>
                         {address.isDefault && (
-                          <span 
-                            className="text-xs px-2 py-1 rounded font-medium"
-                            style={{ 
-                              backgroundColor: 'rgb(236, 223, 204)', 
-                              color: 'rgb(24, 28, 20)' 
-                            }}
-                          >
+                          <span className="text-xs px-2 py-1 rounded font-medium bg-[var(--primary-accent)] text-black">
                             Default
                           </span>
                         )}
@@ -211,19 +182,14 @@ const Settings = () => {
                           <textarea
                             value={address.address}
                             onChange={(e) => handleAddressChange(address.id, e.target.value)}
-                            className="w-full px-3 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] bg-[rgb(60,61,55)] text-[rgb(236,223,204)]"
+                            className="w-full modern-input"
                             rows={3}
                           />
                           <div className="flex space-x-2">
                             <Button 
                               onClick={() => handleSaveAddress(address.id)}
                               size="sm" 
-                              className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] border-0"
-                              style={{ 
-                                backgroundColor: 'rgb(236, 223, 204)', 
-                                color: 'rgb(24, 28, 20)',
-                                fontWeight: '500'
-                              }}
+                              className="btn-primary"
                             >
                               Save
                             </Button>
@@ -234,34 +200,22 @@ const Settings = () => {
                                   addr.id === address.id ? { ...addr, isEditing: false } : addr
                                 ));
                               }}
-                              variant="outline" 
                               size="sm" 
-                              className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
-                              style={{ 
-                                borderColor: 'rgb(105, 117, 101)',
-                                color: 'rgb(236, 223, 204)',
-                                backgroundColor: 'transparent'
-                              }}
+                              className="btn-secondary"
                             >
                               Cancel
                             </Button>
                           </div>
                         </div>
                       ) : (
-                        <p className="text-[rgb(105,117,101)] text-sm">{address.address}</p>
+                        <p className="text-[var(--text-muted)] text-sm">{address.address}</p>
                       )}
                     </div>
                     {!address.isEditing && (
                       <Button 
                         onClick={() => handleEditAddress(address.id)}
-                        variant="outline" 
                         size="sm" 
-                        className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent flex items-center space-x-1"
-                        style={{ 
-                          borderColor: 'rgb(105, 117, 101)',
-                          color: 'rgb(236, 223, 204)',
-                          backgroundColor: 'transparent'
-                        }}
+                        className="btn-secondary flex items-center space-x-1"
                       >
                         <Edit size={14} />
                         <span>Edit</span>
@@ -272,13 +226,7 @@ const Settings = () => {
               ))}
               
               <Button 
-                variant="outline" 
-                className="w-full border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
-                style={{ 
-                  borderColor: 'rgb(105, 117, 101)',
-                  color: 'rgb(236, 223, 204)',
-                  backgroundColor: 'transparent'
-                }}
+                className="w-full btn-secondary"
                 onClick={() => {
                   showToast({
                     type: 'info',
@@ -290,17 +238,11 @@ const Settings = () => {
                 Add New Address
               </Button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Notifications */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
-            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
-          >
-            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
+          <div className="modern-card rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <Bell className="mr-2" size={20} />
               Notification Preferences
             </h2>
@@ -308,8 +250,8 @@ const Settings = () => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-[rgb(236,223,204)]">Order Updates</Label>
-                  <p className="text-sm text-[rgb(105,117,101)]">Get notified about order status changes</p>
+                  <Label className="text-[var(--text-primary)]">Order Updates</Label>
+                  <p className="text-sm text-[var(--text-muted)]">Get notified about order status changes</p>
                 </div>
                 <Switch
                   checked={notifications.orderUpdates}
@@ -326,8 +268,8 @@ const Settings = () => {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-[rgb(236,223,204)]">Promotions</Label>
-                  <p className="text-sm text-[rgb(105,117,101)]">Receive promotional offers and discounts</p>
+                  <Label className="text-[var(--text-primary)]">Promotions</Label>
+                  <p className="text-sm text-[var(--text-muted)]">Receive promotional offers and discounts</p>
                 </div>
                 <Switch
                   checked={notifications.promotions}
@@ -344,8 +286,8 @@ const Settings = () => {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-[rgb(236,223,204)]">Scan Reminders</Label>
-                  <p className="text-sm text-[rgb(105,117,101)]">Reminders to update your body scan</p>
+                  <Label className="text-[var(--text-primary)]">Scan Reminders</Label>
+                  <p className="text-sm text-[var(--text-muted)]">Reminders to update your body scan</p>
                 </div>
                 <Switch
                   checked={notifications.scanReminders}
@@ -360,17 +302,11 @@ const Settings = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Privacy & Security */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
-            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
-          >
-            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
+          <div className="modern-card rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <Shield className="mr-2" size={20} />
               Privacy & Security
             </h2>
@@ -378,53 +314,30 @@ const Settings = () => {
             <div className="space-y-4">
               <Button 
                 onClick={handleDownloadData}
-                variant="outline" 
-                className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
-                style={{ 
-                  borderColor: 'rgb(105, 117, 101)',
-                  color: 'rgb(236, 223, 204)',
-                  backgroundColor: 'transparent'
-                }}
+                className="w-full justify-start btn-secondary"
               >
                 Download My Data
               </Button>
               <Button 
                 onClick={() => navigate('/quick-links')}
-                variant="outline" 
-                className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
-                style={{ 
-                  borderColor: 'rgb(105, 117, 101)',
-                  color: 'rgb(236, 223, 204)',
-                  backgroundColor: 'transparent'
-                }}
+                className="w-full justify-start btn-secondary"
               >
                 Privacy Policy
               </Button>
               <Button 
                 onClick={() => navigate('/quick-links')}
-                variant="outline" 
-                className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
-                style={{ 
-                  borderColor: 'rgb(105, 117, 101)',
-                  color: 'rgb(236, 223, 204)',
-                  backgroundColor: 'transparent'
-                }}
+                className="w-full justify-start btn-secondary"
               >
                 Terms of Service
               </Button>
               <Button 
                 onClick={handleDeleteAccount}
-                variant="destructive" 
-                className="w-full justify-start bg-red-600 text-white hover:bg-red-700 border-0"
-                style={{ 
-                  backgroundColor: 'rgb(220, 38, 38)', 
-                  color: 'white'
-                }}
+                className="w-full justify-start bg-[var(--error-color)] text-white hover:bg-red-700 rounded-xl px-4 py-2"
               >
                 Delete Account
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>

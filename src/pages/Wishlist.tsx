@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { Heart, ShoppingBag, Trash2, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
@@ -154,7 +153,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+    <div className="min-h-screen" style={{ background: 'var(--main-bg)' }}>
       <Navbar 
         onSearchOpen={() => {}}
         onCartOpen={() => {}}
@@ -163,20 +162,16 @@ const Wishlist = () => {
       />
       
       <div className="pt-20 max-w-6xl mx-auto px-4 py-8">
-        {/* Header - REMOVED "Save items you love to see them here" */}
+        {/* CLEAN HEADER - NO DUPLICATION */}
         <div className="text-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center mb-4"
-          >
-            <Heart size={32} className="text-red-500 mr-3 fill-current" />
-            <h1 className="text-3xl font-light text-[rgb(236,223,204)]">My Wishlist</h1>
-          </motion.div>
-          <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto">
+          <div className="flex items-center justify-center mb-4">
+            <Heart size={32} className="wishlist-heart mr-3" />
+            <h1 className="hero-title">My Wishlist</h1>
+          </div>
+          <p className="hero-subtitle max-w-2xl mx-auto">
             {wishlistItems.length > 0 
-              ? `You have ${wishlistItems.length} item${wishlistItems.length > 1 ? 's' : ''} in your wishlist`
-              : 'Your wishlist is currently empty'
+              ? `You have ${wishlistItems.length} item${wishlistItems.length > 1 ? 's' : ''} saved`
+              : 'Your wishlist is empty'
             }
           </p>
         </div>
@@ -184,20 +179,16 @@ const Wishlist = () => {
         {/* Wishlist Items */}
         {wishlistItems.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {wishlistItems.map((item, index) => (
-              <motion.div
+            {wishlistItems.map((item) => (
+              <div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="rounded-lg overflow-hidden shadow-sm border border-[rgb(105,117,101)] group"
-                style={{ backgroundColor: 'rgb(24, 28, 20)' }}
+                className="modern-card rounded-lg overflow-hidden group"
               >
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <img
                     src={item.imageURL}
                     alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 instant-transition"
                   />
                   
                   {/* Out of Stock Overlay */}
@@ -210,20 +201,18 @@ const Wishlist = () => {
                   )}
 
                   {/* Remove Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
+                  <button
                     onClick={() => removeFromWishlist(item.id)}
-                    className="absolute top-4 right-4 p-2 bg-red-500 rounded-full text-white hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100"
+                    className="absolute top-4 right-4 p-2 bg-[var(--error-color)] rounded-full text-white hover:bg-red-600 instant-transition opacity-0 group-hover:opacity-100"
                   >
                     <X size={16} />
-                  </motion.button>
+                  </button>
                 </div>
                 
                 <div className="p-4">
-                  <h3 className="font-medium text-[rgb(236,223,204)] mb-1 text-sm sm:text-base">{item.name}</h3>
-                  <p className="text-xs sm:text-sm text-[rgb(105,117,101)] mb-2">{item.category}</p>
-                  <p className="text-base sm:text-lg font-semibold text-[rgb(236,223,204)] mb-3">₹{item.price}</p>
+                  <h3 className="font-medium text-[var(--text-primary)] mb-1 text-sm sm:text-base">{item.name}</h3>
+                  <p className="text-xs sm:text-sm text-[var(--text-muted)] mb-2">{item.category}</p>
+                  <p className="text-base sm:text-lg font-semibold text-[var(--text-primary)] mb-3">₹{item.price}</p>
                   
                   {/* Stock Status */}
                   <div className="mb-3">
@@ -232,7 +221,7 @@ const Wishlist = () => {
                         In Stock ({item.stock} left)
                       </span>
                     ) : (
-                      <span className="text-xs text-red-400 bg-red-900/20 px-2 py-1 rounded">
+                      <span className="text-xs text-[var(--error-color)] bg-red-900/20 px-2 py-1 rounded">
                         Out of Stock
                       </span>
                     )}
@@ -244,7 +233,7 @@ const Wishlist = () => {
                       {item.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs bg-[rgb(60,61,55)] text-[rgb(105,117,101)] rounded"
+                          className="px-2 py-1 text-xs bg-[var(--border-color)] text-[var(--text-muted)] rounded"
                         >
                           {tag}
                         </span>
@@ -256,7 +245,7 @@ const Wishlist = () => {
                     <Button
                       onClick={() => addToCartFromWishlist(item)}
                       disabled={item.stock === 0}
-                      className="w-full bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] flex items-center justify-center space-x-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full btn-primary flex items-center justify-center space-x-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <ShoppingBag size={16} />
                       <span>{item.stock === 0 ? 'Out of Stock' : 'Add to Cart'}</span>
@@ -264,47 +253,37 @@ const Wishlist = () => {
                     
                     <Button
                       onClick={() => removeFromWishlist(item.id)}
-                      variant="outline"
-                      className="w-full border-red-500 text-red-400 hover:bg-red-900/20 hover:border-red-400 flex items-center justify-center space-x-2 rounded-xl"
+                      className="w-full border border-[var(--error-color)] text-[var(--error-color)] hover:bg-red-900/20 hover:border-red-400 bg-transparent flex items-center justify-center space-x-2 rounded-xl"
                     >
                       <Trash2 size={16} />
                       <span>Remove</span>
                     </Button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center py-16"
-          >
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-[rgb(24,28,20)] border border-[rgb(105,117,101)] flex items-center justify-center">
-              <Heart size={32} className="text-[rgb(105,117,101)]" />
+          <div className="text-center py-16">
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full modern-card flex items-center justify-center">
+              <Heart size={32} className="text-[var(--text-muted)]" />
             </div>
-            <h3 className="text-xl font-medium text-[rgb(236,223,204)] mb-2">Your wishlist is empty</h3>
-            <p className="text-[rgb(105,117,101)] mb-8 max-w-md mx-auto">
+            <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">Your wishlist is empty</h3>
+            <p className="text-[var(--text-muted)] mb-8 max-w-md mx-auto">
               Start browsing our collection and save items you love by clicking the heart icon on any product.
             </p>
             <Button 
               onClick={() => navigate('/catalog')} 
-              className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] rounded-xl px-8 py-3"
+              className="btn-primary rounded-xl px-8 py-3"
             >
               Browse Collection
             </Button>
-          </motion.div>
+          </div>
         )}
 
         {/* Quick Actions */}
         {wishlistItems.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-12 text-center"
-          >
+          <div className="mt-12 text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={() => {
@@ -313,7 +292,7 @@ const Wishlist = () => {
                   inStockItems.forEach(item => addToCartFromWishlist(item));
                 }}
                 disabled={wishlistItems.every(item => item.stock === 0)}
-                className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] rounded-xl px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-primary rounded-xl px-6 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add All to Cart
               </Button>
@@ -330,13 +309,12 @@ const Wishlist = () => {
                     message: 'All items have been removed from your wishlist.'
                   });
                 }}
-                variant="outline"
-                className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] rounded-xl px-6 py-3"
+                className="btn-secondary rounded-xl px-6 py-3"
               >
                 Clear Wishlist
               </Button>
             </div>
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

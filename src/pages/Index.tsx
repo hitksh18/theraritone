@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Camera, ShoppingBag, Sparkles, Star, TrendingUp, Mail, Phone, MapPin, Heart } from 'lucide-react';
+import { Camera, ShoppingBag, Shield, Zap, Clock, Star, TrendingUp, Mail, Phone, MapPin, Heart } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import SearchOverlay from '@/components/SearchOverlay';
 import ChatWidget from '@/components/ChatWidget';
@@ -15,7 +15,6 @@ import { addToCart } from '@/lib/user';
 
 const Index = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -86,34 +85,6 @@ const Index = () => {
       sizes: ['S', 'M', 'L', 'XL'],
       createdAt: new Date(),
       rating: 4.7
-    },
-    {
-      id: '4',
-      name: 'Pop Art tshirt',
-      description: 'This wearable masterpiece showcases bold, colorful graphics that pay homage to the iconic Pop Art movement, making it a statement piece in any wardrobe.',
-      price: 434.13,
-      imageURL: 'https://static.wixstatic.com/media/3903b5_4fde7750734f4f188841c462d77d27bb~mv2.jpg/v1/fill/w_500,h_667,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_4fde7750734f4f188841c462d77d27bb~mv2.jpg',
-      category: 'Tops',
-      stock: 0,
-      tags: ['Tshirt', 'luxury', 'comfort'],
-      sizes: ['XS', 'S', 'M', 'L'],
-      createdAt: new Date(),
-      rating: 4.6
-    },
-    {
-      id: '5',
-      name: 'Raritone David Bowie Hoodie',
-      description: 'Celebrate the legacy of a music legend with the Raritone David Bowie Hoodie, designed exclusively for the discerning fan at Theraritone.',
-      price: 7999,
-      imageURL: 'https://static.wixstatic.com/media/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg/v1/fill/w_346,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_9e76791087d8471da8745d15ce88f383~mv2.jpg',
-      backImageURL: 'https://static.wixstatic.com/media/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg/v1/fill/w_348,h_490,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3903b5_d1930f8ee63542d0a3d165512779be61~mv2.jpg',
-      category: 'Outerwear',
-      stock: 4,
-      tags: ['leather', 'jacket', 'premium'],
-      sizes: ['S', 'M', 'L', 'XL'],
-      colors: ['Black', 'Brown'],
-      createdAt: new Date(),
-      rating: 4.9
     }
   ];
 
@@ -157,34 +128,9 @@ const Index = () => {
     }
   ];
 
-  // Best Picks
-  const bestPicks = catalogProducts
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-    .slice(0, 3)
-    .map(product => ({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.imageURL,
-      backImageURL: product.backImageURL,
-      rating: product.rating || 4.5,
-      category: product.category,
-      description: product.description,
-      stock: product.stock,
-      tags: product.tags,
-      sizes: product.sizes,
-      colors: product.colors
-    }));
-
   // Navigate to catalog with category filter
   const handleCategoryClick = (category: string) => {
     navigate(`/catalog?category=${encodeURIComponent(category)}`);
-  };
-
-  // Handle Best Picks product click
-  const handleBestPickClick = (product: any) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
   };
 
   // Handle add to cart from modal
@@ -256,29 +202,31 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
+    <div className="min-h-screen text-[var(--text-primary)]" style={{ background: 'var(--main-bg)' }}>
       {/* Navigation */}
       <Navbar 
         onSearchOpen={() => setIsSearchOpen(true)}
-        onCartOpen={() => setIsCartOpen(true)}
+        onCartOpen={() => {}}
       />
 
-      {/* CINEMATIC 3D HERO SECTION */}
+      {/* ENHANCED HERO SECTION */}
       <div className="relative min-h-screen overflow-hidden flex items-center justify-center">
-        {/* 3D Butterfly Background */}
-        <ButterflyScene />
+        {/* 3D Butterfly Background - LARGER & HIGHER */}
+        <div className="absolute inset-0 w-full h-full" style={{ transform: 'scale(1.2) translateY(-10vh)', zIndex: 1 }}>
+          <ButterflyScene />
+        </div>
         
         {/* Dark gradient overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" style={{ zIndex: 2 }} />
 
-        {/* Hero Content - NO RECTANGLE BACKGROUND */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8" style={{ zIndex: 3 }}>
+        {/* Hero Content - LOGO BELOW BUTTERFLY CENTERLINE */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-8" style={{ zIndex: 3, transform: 'translateY(15vh)' }}>
           <div className="p-8 sm:p-12 lg:p-16">
             <div className="mb-8">
               <img
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto float-animation"
+                className="mx-auto w-full max-w-xs sm:max-w-2xl h-auto minimal-float"
                 style={{ 
                   filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.8)) brightness(1.2)',
                   textShadow: '0 0 20px rgba(255,255,255,0.5)'
@@ -286,7 +234,7 @@ const Index = () => {
               />
             </div>
 
-            <p className="text-subtitle font-light mb-16 text-[rgb(236,223,204)] opacity-90" 
+            <p className="hero-subtitle font-light mb-16 opacity-90" 
                style={{ 
                  textShadow: '0 2px 10px rgba(0,0,0,0.8)',
                  filter: 'brightness(1.2)'
@@ -294,32 +242,19 @@ const Index = () => {
               Fashion Meets Technology
             </p>
 
-            {/* Action Buttons with Enhanced Visibility */}
+            {/* EQUAL STYLED BUTTONS */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
               <button
-                className="btn-glass font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                className="btn-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
                 onClick={() => navigate('/scan')}
-                style={{
-                  background: 'rgba(236, 223, 204, 0.15)',
-                  border: '1px solid rgba(236, 223, 204, 0.4)',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.3)'
-                }}
               >
                 <Camera size={isMobile ? 18 : 20} />
                 <span>Start Body Scan</span>
               </button>
               
               <button
-                className="btn-glass-primary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
+                className="btn-secondary font-medium flex items-center space-x-3 rounded-full justify-center w-full max-w-xs sm:min-w-[220px] px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base"
                 onClick={() => navigate('/catalog')}
-                style={{
-                  background: 'rgba(236, 223, 204, 0.95)',
-                  color: 'rgb(24, 28, 20)',
-                  border: '1px solid rgba(236, 223, 204, 1)',
-                  backdropFilter: 'blur(20px)',
-                  boxShadow: '0 8px 32px rgba(236, 223, 204, 0.3)'
-                }}
               >
                 <ShoppingBag size={isMobile ? 18 : 20} />
                 <span>Browse Collection</span>
@@ -341,15 +276,59 @@ const Index = () => {
         </div>
       </div>
 
-      {/* NEW ARRIVALS SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
+      {/* BODY SCAN FEATURES SECTION (REPLACES NEW ARRIVALS) */}
+      <section className="py-12 sm:py-20" style={{ background: 'var(--main-bg)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
-              <Sparkles className="mr-3" size={isMobile ? 24 : 32} />
+            <h2 className="hero-title mb-4 flex items-center justify-center">
+              <Shield className="mr-3" size={isMobile ? 24 : 32} color="var(--primary-accent)" />
+              AI Body Scanning
+            </h2>
+            <p className="hero-subtitle max-w-2xl mx-auto px-4">
+              Revolutionary technology that ensures perfect fit every time with complete privacy and precision.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+            {/* 100% Private */}
+            <div className="feature-card">
+              <Shield size={48} color="var(--primary-accent)" className="mx-auto mb-4" />
+              <h3 className="feature-title">100% Private</h3>
+              <p className="feature-description">
+                Body data never stored or sent online. All processing happens locally on your device for complete privacy.
+              </p>
+            </div>
+
+            {/* 99% Accurate */}
+            <div className="feature-card">
+              <Zap size={48} color="var(--primary-accent)" className="mx-auto mb-4" />
+              <h3 className="feature-title">99% Accurate</h3>
+              <p className="feature-description">
+                Advanced AI scanning with micro-fit precision. Our technology ensures the most accurate measurements possible.
+              </p>
+            </div>
+
+            {/* 30 Second Scan */}
+            <div className="feature-card">
+              <Clock size={48} color="var(--primary-accent)" className="mx-auto mb-4" />
+              <h3 className="feature-title">30 Second Scan</h3>
+              <p className="feature-description">
+                Fast, smartphone-only scan with no extra hardware required. Get your perfect measurements in half a minute.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW ARRIVALS SECTION */}
+      <section className="py-12 sm:py-20" style={{ background: 'var(--card-bg)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-16">
+            <h2 className="hero-title mb-4 flex items-center justify-center">
+              <Star className="mr-3" size={isMobile ? 24 : 32} color="var(--primary-accent)" />
               New Arrivals
             </h2>
-            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
+            <p className="hero-subtitle max-w-2xl mx-auto px-4">
               Discover our latest collections, meticulously crafted and designed for the modern luxury connoisseur.
             </p>
           </div>
@@ -361,18 +340,18 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => navigate('/catalog')}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
+                <div className="modern-card rounded-2xl overflow-hidden instant-transition hover:bg-[var(--border-color)]">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 instant-transition"
                     />
                     <div className="absolute top-3 left-3">
                       <span className={`font-medium rounded-full px-3 py-1 text-xs backdrop-blur-md ${
                         item.tag === 'Out of Stock' 
-                          ? 'bg-red-500/80 text-white' 
-                          : 'bg-white/20 text-white border border-white/30'
+                          ? 'bg-[var(--error-color)] text-white' 
+                          : 'bg-[var(--primary-accent)] text-black border border-[var(--border-color)]'
                       }`}>
                         {item.tag}
                       </span>
@@ -381,23 +360,23 @@ const Index = () => {
                     {/* Wishlist Heart Button */}
                     <button
                       onClick={(e) => quickAddToWishlist(e, item.id.toString())}
-                      className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 backdrop-blur-md ${
+                      className={`absolute top-3 right-3 p-2 rounded-full instant-transition opacity-0 group-hover:opacity-100 backdrop-blur-md ${
                         wishlist.includes(item.id.toString())
-                          ? 'bg-red-500/80 text-white'
-                          : 'bg-white/20 text-white hover:bg-white/30 border border-white/30'
+                          ? 'wishlist-heart bg-[var(--error-color)]/20'
+                          : 'text-white hover:bg-white/30 border border-white/30'
                       }`}
                     >
                       <Heart 
                         size={14} 
-                        className={wishlist.includes(item.id.toString()) ? 'fill-current' : ''} 
+                        className={wishlist.includes(item.id.toString()) ? 'wishlist-heart' : ''} 
                       />
                     </button>
                   </div>
                   <div className="p-4">
-                    <h3 className="font-medium mb-2 text-[rgb(236,223,204)] text-base sm:text-lg">
+                    <h3 className="font-medium mb-2 text-[var(--text-primary)] text-base sm:text-lg">
                       {item.name}
                     </h3>
-                    <p className="text-[rgb(105,117,101)] text-sm">
+                    <p className="text-[var(--text-muted)] text-sm">
                       {item.price}
                     </p>
                   </div>
@@ -409,14 +388,14 @@ const Index = () => {
       </section>
 
       {/* CATEGORIES SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
+      <section className="py-12 sm:py-20" style={{ background: 'var(--main-bg)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
-              <TrendingUp className="mr-3" size={isMobile ? 24 : 32} />
+            <h2 className="hero-title mb-4 flex items-center justify-center">
+              <TrendingUp className="mr-3" size={isMobile ? 24 : 32} color="var(--primary-accent)" />
               Shop by Category
             </h2>
-            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
+            <p className="hero-subtitle max-w-2xl mx-auto px-4">
               Explore our diverse range of fashion categories, each carefully curated for your unique style.
             </p>
           </div>
@@ -428,20 +407,20 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => handleCategoryClick(category.category)}
               >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
+                <div className="modern-card rounded-2xl overflow-hidden instant-transition hover:bg-[var(--border-color)]">
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 instant-transition"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                   <div className="text-center p-4">
-                    <h3 className="font-medium mb-1 text-[rgb(236,223,204)] text-base sm:text-lg">
+                    <h3 className="font-medium mb-1 text-[var(--text-primary)] text-base sm:text-lg">
                       {category.name}
                     </h3>
-                    <p className="text-[rgb(105,117,101)] text-sm">
+                    <p className="text-[var(--text-muted)] text-sm">
                       {category.count}
                     </p>
                   </div>
@@ -452,80 +431,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* BEST PICKS SECTION */}
-      <section className="py-12 sm:py-20" style={{ background: 'linear-gradient(135deg, #1a1d1a 0%, #2a2d2a 100%)' }}>
+      {/* FOOTER SECTION WITH SMOOTH SCROLL LINKS */}
+      <footer className="py-8 sm:py-16 section-divider border-t" style={{ background: 'var(--card-bg)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-16">
-            <h2 className="text-hero font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
-              <Star className="mr-3" size={isMobile ? 24 : 32} />
-              Best Picks
-            </h2>
-            <p className="text-subtitle text-[rgb(105,117,101)] max-w-2xl mx-auto px-4">
-              Our most popular items, loved by customers worldwide for their exceptional quality and style.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {bestPicks.map((item) => (
-              <div
-                key={item.id}
-                className="group cursor-pointer"
-                onClick={() => handleBestPickClick(item)}
-              >
-                <div className="glass-card rounded-2xl overflow-hidden transition-glass hover-glass">
-                  <div className="aspect-[3/4] relative overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Wishlist Heart Button */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleAddToWishlist(item.id);
-                      }}
-                      className={`absolute top-4 right-4 p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 backdrop-blur-md ${
-                        wishlist.includes(item.id)
-                          ? 'bg-red-500/80 text-white'
-                          : 'bg-white/20 text-white hover:bg-white/30 border border-white/30'
-                      }`}
-                    >
-                      <Heart 
-                        size={16} 
-                        className={wishlist.includes(item.id) ? 'fill-current' : ''} 
-                      />
-                    </button>
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-[rgb(236,223,204)] text-base sm:text-lg">
-                        {item.name}
-                      </h3>
-                      <div className="flex items-center space-x-1">
-                        <Star size={14} className="text-yellow-400 fill-current" />
-                        <span className="text-[rgb(105,117,101)] text-sm">
-                          {item.rating}
-                        </span>
-                      </div>
-                    </div>
-                    <p className="text-[rgb(105,117,101)] text-sm">
-                      ₹{item.price}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER SECTION */}
-      <footer className="py-8 sm:py-16 border-t border-white/10" style={{ background: 'linear-gradient(135deg, #2a2d2a 0%, #1a1d1a 100%)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card rounded-2xl p-6 sm:p-8">
+          <div className="modern-card rounded-2xl p-6 sm:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Brand Section */}
               <div className="lg:col-span-2">
@@ -534,7 +443,7 @@ const Index = () => {
                   alt="RARITONE"
                   className="h-16 sm:h-20 w-auto mb-4"
                 />
-                <p className="text-[rgb(105,117,101)] max-w-md leading-relaxed text-sm sm:text-base">
+                <p className="text-[var(--text-muted)] max-w-md leading-relaxed text-sm sm:text-base">
                   Revolutionizing fashion with AI-powered body scanning technology. 
                   Experience perfect fit and personalized style recommendations across India.
                 </p>
@@ -542,35 +451,34 @@ const Index = () => {
 
               {/* Quick Links */}
               <div>
-                <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Quick Links</h3>
+                <h3 className="font-semibold text-[var(--text-primary)] mb-4 text-base sm:text-lg">Quick Links</h3>
                 <ul className="space-y-2">
-                  <li><a href="/shipping" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Shipping & Delivery</a></li>
-                  <li><a href="/returns" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Returns & Exchanges</a></li>
-                  <li><a href="/faqs" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">FAQs</a></li>
-                  <li><a href="/terms" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Terms & Conditions</a></li>
-                  <li><a href="/contact" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] text-sm sm:text-base transition-colors">Contact Us</a></li>
+                  <li><a href="#about" className="text-[var(--text-muted)] hover:text-[var(--secondary-accent)] text-sm sm:text-base instant-transition">About Us</a></li>
+                  <li><a href="#privacy" className="text-[var(--text-muted)] hover:text-[var(--secondary-accent)] text-sm sm:text-base instant-transition">Privacy Policy</a></li>
+                  <li><a href="#returns" className="text-[var(--text-muted)] hover:text-[var(--secondary-accent)] text-sm sm:text-base instant-transition">Returns & Exchanges</a></li>
+                  <li><a href="#contact" className="text-[var(--text-muted)] hover:text-[var(--secondary-accent)] text-sm sm:text-base instant-transition">Contact Us</a></li>
                 </ul>
               </div>
 
               {/* Contact Info */}
               <div>
-                <h3 className="font-semibold text-[rgb(236,223,204)] mb-4 text-base sm:text-lg">Contact</h3>
+                <h3 className="font-semibold text-[var(--text-primary)] mb-4 text-base sm:text-lg">Contact</h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Mail size={16} className="text-[rgb(105,117,101)]" />
-                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                    <Mail size={16} className="text-[var(--text-muted)]" />
+                    <span className="text-[var(--text-muted)] text-sm sm:text-base">
                       hello@raritone.in
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Phone size={16} className="text-[rgb(105,117,101)]" />
-                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                    <Phone size={16} className="text-[var(--text-muted)]" />
+                    <span className="text-[var(--text-muted)] text-sm sm:text-base">
                       +91 98765 43210
                     </span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <MapPin size={16} className="text-[rgb(105,117,101)]" />
-                    <span className="text-[rgb(105,117,101)] text-sm sm:text-base">
+                    <MapPin size={16} className="text-[var(--text-muted)]" />
+                    <span className="text-[var(--text-muted)] text-sm sm:text-base">
                       Mumbai, India
                     </span>
                   </div>
@@ -578,8 +486,8 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="border-t border-white/10 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
-              <p className="text-[rgb(105,117,101)] text-xs sm:text-sm">
+            <div className="section-divider border-t mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
+              <p className="text-[var(--text-muted)] text-xs sm:text-sm">
                 © 2025 RARITONE. All rights reserved. | Powered by AI Fashion Technology | Made in India
               </p>
             </div>
