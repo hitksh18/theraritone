@@ -92,7 +92,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--main-bg)' }}>
+    <div className="min-h-screen">
       <Navbar 
         onSearchOpen={() => {}}
         onCartOpen={() => {}}
@@ -103,7 +103,7 @@ const Settings = () => {
       <div className="pt-20 max-w-4xl mx-auto px-4 py-8">
         <div className="space-y-6">
           {/* Personal Information */}
-          <div className="modern-card rounded-lg p-6">
+          <div className="luxury-card rounded-lg p-6">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <User className="mr-2" size={20} />
               Personal Information
@@ -116,7 +116,7 @@ const Settings = () => {
                   id="name"
                   value={personalInfo.name}
                   onChange={(e) => setPersonalInfo({...personalInfo, name: e.target.value})}
-                  className="mt-1 modern-input"
+                  className="mt-1 luxury-input"
                 />
               </div>
               
@@ -126,7 +126,7 @@ const Settings = () => {
                   id="email"
                   value={personalInfo.email}
                   disabled
-                  className="mt-1 modern-input opacity-50"
+                  className="mt-1 luxury-input opacity-50"
                 />
               </div>
               
@@ -136,7 +136,7 @@ const Settings = () => {
                   id="phone"
                   value={personalInfo.phone}
                   onChange={(e) => setPersonalInfo({...personalInfo, phone: e.target.value})}
-                  className="mt-1 modern-input"
+                  className="mt-1 luxury-input"
                 />
               </div>
             </div>
@@ -158,7 +158,7 @@ const Settings = () => {
           </div>
 
           {/* Delivery Addresses */}
-          <div className="modern-card rounded-lg p-6">
+          <div className="luxury-card rounded-lg p-6">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <MapPin className="mr-2" size={20} />
               Delivery Addresses
@@ -182,7 +182,7 @@ const Settings = () => {
                           <textarea
                             value={address.address}
                             onChange={(e) => handleAddressChange(address.id, e.target.value)}
-                            className="w-full modern-input"
+                            className="w-full luxury-input"
                             rows={3}
                           />
                           <div className="flex space-x-2">
@@ -208,7 +208,7 @@ const Settings = () => {
                           </div>
                         </div>
                       ) : (
-                        <p className="text-[var(--text-muted)] text-sm">{address.address}</p>
+                        <p className="text-[var(--secondary-accent)] text-sm">{address.address}</p>
                       )}
                     </div>
                     {!address.isEditing && (
@@ -241,7 +241,7 @@ const Settings = () => {
           </div>
 
           {/* Notifications */}
-          <div className="modern-card rounded-lg p-6">
+          <div className="luxury-card rounded-lg p-6">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <Bell className="mr-2" size={20} />
               Notification Preferences
@@ -251,7 +251,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <Label className="text-[var(--text-primary)]">Order Updates</Label>
-                  <p className="text-sm text-[var(--text-muted)]">Get notified about order status changes</p>
+                  <p className="text-sm text-[var(--secondary-accent)]">Get notified about order status changes</p>
                 </div>
                 <Switch
                   checked={notifications.orderUpdates}
@@ -269,7 +269,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <Label className="text-[var(--text-primary)]">Promotions</Label>
-                  <p className="text-sm text-[var(--text-muted)]">Receive promotional offers and discounts</p>
+                  <p className="text-sm text-[var(--secondary-accent)]">Receive promotional offers and discounts</p>
                 </div>
                 <Switch
                   checked={notifications.promotions}
@@ -287,7 +287,7 @@ const Settings = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <Label className="text-[var(--text-primary)]">Scan Reminders</Label>
-                  <p className="text-sm text-[var(--text-muted)]">Reminders to update your body scan</p>
+                  <p className="text-sm text-[var(--secondary-accent)]">Reminders to update your body scan</p>
                 </div>
                 <Switch
                   checked={notifications.scanReminders}
@@ -305,7 +305,7 @@ const Settings = () => {
           </div>
 
           {/* Privacy & Security */}
-          <div className="modern-card rounded-lg p-6">
+          <div className="luxury-card rounded-lg p-6">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4 flex items-center">
               <Shield className="mr-2" size={20} />
               Privacy & Security

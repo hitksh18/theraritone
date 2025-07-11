@@ -50,7 +50,7 @@ const Profile = () => {
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--main-bg)' }}>
+    <div className="min-h-screen">
       <Navbar 
         onSearchOpen={() => {}}
         onCartOpen={() => {}}
@@ -62,10 +62,10 @@ const Profile = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Profile Info */}
           <div className="lg:col-span-2">
-            <div className="modern-card rounded-lg p-8">
+            <div className="luxury-card rounded-lg p-8">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 modern-card rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 luxury-card rounded-full flex items-center justify-center">
                     {user?.photoURL ? (
                       <img src={user.photoURL} alt="Profile" className="w-full h-full rounded-full object-cover" />
                     ) : (
@@ -74,7 +74,7 @@ const Profile = () => {
                   </div>
                   <div>
                     <h2 className="text-2xl font-semibold text-[var(--text-primary)]">{profile.name || 'User Profile'}</h2>
-                    <p className="text-[var(--text-muted)]">{profile.email}</p>
+                    <p className="text-[var(--secondary-accent)]">{profile.email}</p>
                   </div>
                 </div>
                 <Button
@@ -94,7 +94,7 @@ const Profile = () => {
                     value={profile.name}
                     onChange={(e) => setProfile({...profile, name: e.target.value})}
                     disabled={!isEditing}
-                    className="mt-1 modern-input"
+                    className="mt-1 luxury-input"
                   />
                 </div>
                 
@@ -104,7 +104,7 @@ const Profile = () => {
                     id="email"
                     value={profile.email}
                     disabled
-                    className="mt-1 modern-input opacity-50"
+                    className="mt-1 luxury-input opacity-50"
                   />
                 </div>
 
@@ -115,7 +115,7 @@ const Profile = () => {
                     value={profile.stylePreference}
                     onChange={(e) => setProfile({...profile, stylePreference: e.target.value})}
                     disabled={!isEditing}
-                    className="mt-1 w-full modern-input"
+                    className="mt-1 w-full luxury-input"
                   >
                     <option value="">Select Style</option>
                     <option value="Minimalist">Minimalist</option>
@@ -132,7 +132,7 @@ const Profile = () => {
                     value={profile.gender}
                     onChange={(e) => setProfile({...profile, gender: e.target.value})}
                     disabled={!isEditing}
-                    className="mt-1 w-full modern-input"
+                    className="mt-1 w-full luxury-input"
                   >
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
@@ -174,7 +174,7 @@ const Profile = () => {
           {/* Quick Actions & Cart Overview */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <div className="modern-card rounded-lg p-6">
+            <div className="luxury-card rounded-lg p-6">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4">Quick Actions</h3>
               
               <div className="space-y-3">
@@ -206,7 +206,7 @@ const Profile = () => {
 
             {/* Cart Overview */}
             {cart.length > 0 && (
-              <div className="modern-card rounded-lg p-6">
+              <div className="luxury-card rounded-lg p-6">
                 <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center">
                   <ShoppingBag className="mr-2" size={16} />
                   Cart Overview
@@ -214,12 +214,12 @@ const Profile = () => {
                 
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-[var(--text-muted)]">Items:</span>
+                    <span className="text-[var(--secondary-accent)]">Items:</span>
                     <span className="font-medium text-[var(--text-primary)]">{cart.length}</span>
                   </div>
                   
                   <div className="flex justify-between">
-                    <span className="text-[var(--text-muted)]">Total:</span>
+                    <span className="text-[var(--secondary-accent)]">Total:</span>
                     <span className="font-medium text-[var(--text-primary)]">₹{cartTotal}</span>
                   </div>
                   

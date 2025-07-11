@@ -108,10 +108,10 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* MODERN CHAT BUTTON */}
+      {/* LUXURY CHAT BUTTON */}
       <button
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full instant-transition modern-chat flex items-center space-x-3"
+        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full transition-all duration-300 luxury-chat flex items-center space-x-3 luxury-glow"
       >
         {/* Logo container */}
         <div className="w-8 h-8 relative rounded-full overflow-hidden flex items-center justify-center border border-[var(--border-color)]">
@@ -125,16 +125,16 @@ const ChatWidget: React.FC = () => {
             }}
           />
         </div>
-        <span className="font-medium text-[var(--text-primary)]">
+        <span className="font-medium text-white">
           Chat with us
         </span>
       </button>
 
-      {/* MODERN CHAT MODAL */}
+      {/* LUXURY CHAT MODAL */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl overflow-hidden modern-chat instant-transition">
+        <div className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl overflow-hidden luxury-chat transition-all duration-300">
           {/* Header */}
-          <div className="text-[var(--text-primary)] p-4 flex items-center justify-between border-b border-[var(--border-color)]">
+          <div className="text-white p-4 flex items-center justify-between border-b border-[var(--border-color)]">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-color)]">
                 <img
@@ -153,16 +153,16 @@ const ChatWidget: React.FC = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1 hover:bg-[var(--border-color)] rounded instant-transition"
+                className="p-1 hover:bg-[var(--border-color)] rounded transition-colors"
               >
                 <ChevronDown 
                   size={16} 
-                  className={`instant-transition ${isMinimized ? 'rotate-180' : ''}`}
+                  className={`transition-transform duration-300 ${isMinimized ? 'rotate-180' : ''}`}
                 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-[var(--border-color)] rounded instant-transition"
+                className="p-1 hover:bg-[var(--border-color)] rounded transition-colors"
               >
                 <X size={16} />
               </button>
@@ -174,22 +174,22 @@ const ChatWidget: React.FC = () => {
               {/* Guest Email Form */}
               {showEmailForm && !user && (
                 <div className="p-4 border-b border-[var(--border-color)]">
-                  <h4 className="font-medium mb-2 text-[var(--text-primary)]">Privacy Notice</h4>
+                  <h4 className="font-medium mb-2 text-white">Privacy Notice</h4>
                   <form onSubmit={handleGuestEmailSubmit} className="space-y-3">
                     <input
                       type="email"
                       placeholder="Email"
                       value={guestEmail}
                       onChange={(e) => setGuestEmail(e.target.value)}
-                      className="modern-input w-full"
+                      className="luxury-input w-full"
                       required
                     />
-                    <p className="text-xs text-[var(--text-muted)]">
+                    <p className="text-xs text-[var(--secondary-accent)]">
                       Your personal data is collected in the course of providing remote chat assistance and will be processed in full compliance with our privacy policy.
                     </p>
                     <div className="flex items-center space-x-2">
                       <input type="checkbox" id="accept" required className="rounded" />
-                      <label htmlFor="accept" className="text-xs text-[var(--text-muted)]">I accept</label>
+                      <label htmlFor="accept" className="text-xs text-[var(--secondary-accent)]">I accept</label>
                     </div>
                     <button
                       type="submit"
@@ -211,9 +211,9 @@ const ChatWidget: React.FC = () => {
                         className={`flex ${message.isAdmin ? 'justify-start' : 'justify-end'}`}
                       >
                         <div
-                          className={`max-w-xs px-3 py-2 rounded-lg text-sm instant-transition ${
+                          className={`max-w-xs px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
                             message.isAdmin
-                              ? 'modern-card border border-[var(--border-color)]'
+                              ? 'luxury-card border border-[var(--border-color)]'
                               : 'bg-[var(--primary-accent)] text-black'
                           }`}
                         >
@@ -225,11 +225,11 @@ const ChatWidget: React.FC = () => {
                     {/* Typing indicator */}
                     {isTyping && (
                       <div className="flex justify-start">
-                        <div className="modern-card text-[var(--text-primary)] px-3 py-2 rounded-lg text-sm border border-[var(--border-color)]">
+                        <div className="luxury-card text-[var(--text-primary)] px-3 py-2 rounded-lg text-sm border border-[var(--border-color)]">
                           <div className="flex space-x-1">
-                            <div className="w-2 h-2 bg-[var(--text-muted)] rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-[var(--text-muted)] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 bg-[var(--text-muted)] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="w-2 h-2 bg-[var(--secondary-accent)] rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-[var(--secondary-accent)] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-[var(--secondary-accent)] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
                       </div>
@@ -247,7 +247,7 @@ const ChatWidget: React.FC = () => {
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                        className="flex-1 modern-input"
+                        className="flex-1 luxury-input"
                       />
                       <button
                         onClick={handleSendMessage}

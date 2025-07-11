@@ -153,7 +153,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--main-bg)' }}>
+    <div className="min-h-screen">
       <Navbar 
         onSearchOpen={() => {}}
         onCartOpen={() => {}}
@@ -166,7 +166,7 @@ const Wishlist = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <Heart size={32} className="wishlist-heart mr-3" />
-            <h1 className="hero-title">My Wishlist</h1>
+            <h1 className="hero-title text-white">My Wishlist</h1>
           </div>
           <p className="hero-subtitle max-w-2xl mx-auto">
             {wishlistItems.length > 0 
@@ -182,13 +182,13 @@ const Wishlist = () => {
             {wishlistItems.map((item) => (
               <div
                 key={item.id}
-                className="modern-card rounded-lg overflow-hidden group"
+                className="luxury-card rounded-lg overflow-hidden group"
               >
                 <div className="aspect-[3/4] overflow-hidden relative">
                   <img
                     src={item.imageURL}
                     alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-105 instant-transition"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   
                   {/* Out of Stock Overlay */}
@@ -203,7 +203,7 @@ const Wishlist = () => {
                   {/* Remove Button */}
                   <button
                     onClick={() => removeFromWishlist(item.id)}
-                    className="absolute top-4 right-4 p-2 bg-[var(--error-color)] rounded-full text-white hover:bg-red-600 instant-transition opacity-0 group-hover:opacity-100"
+                    className="absolute top-4 right-4 p-2 bg-[var(--error-color)] rounded-full text-white hover:bg-red-600 transition-colors opacity-0 group-hover:opacity-100"
                   >
                     <X size={16} />
                   </button>
@@ -211,7 +211,7 @@ const Wishlist = () => {
                 
                 <div className="p-4">
                   <h3 className="font-medium text-[var(--text-primary)] mb-1 text-sm sm:text-base">{item.name}</h3>
-                  <p className="text-xs sm:text-sm text-[var(--text-muted)] mb-2">{item.category}</p>
+                  <p className="text-xs sm:text-sm text-[var(--secondary-accent)] mb-2">{item.category}</p>
                   <p className="text-base sm:text-lg font-semibold text-[var(--text-primary)] mb-3">₹{item.price}</p>
                   
                   {/* Stock Status */}
@@ -233,7 +233,7 @@ const Wishlist = () => {
                       {item.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 text-xs bg-[var(--border-color)] text-[var(--text-muted)] rounded"
+                          className="px-2 py-1 text-xs bg-[var(--secondary-accent)] bg-opacity-20 text-[var(--secondary-accent)] rounded"
                         >
                           {tag}
                         </span>
@@ -265,11 +265,11 @@ const Wishlist = () => {
           </div>
         ) : (
           <div className="text-center py-16">
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full modern-card flex items-center justify-center">
-              <Heart size={32} className="text-[var(--text-muted)]" />
+            <div className="w-24 h-24 mx-auto mb-6 rounded-full luxury-card flex items-center justify-center">
+              <Heart size={32} className="text-[var(--secondary-accent)]" />
             </div>
-            <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">Your wishlist is empty</h3>
-            <p className="text-[var(--text-muted)] mb-8 max-w-md mx-auto">
+            <h3 className="text-xl font-medium text-white mb-2">Your wishlist is empty</h3>
+            <p className="text-[var(--secondary-accent)] mb-8 max-w-md mx-auto">
               Start browsing our collection and save items you love by clicking the heart icon on any product.
             </p>
             <Button 
