@@ -69,7 +69,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       
       <div
         className="fixed right-0 top-0 h-full w-full max-w-md shadow-2xl z-50 overflow-hidden"
-        style={{ backgroundColor: 'rgb(60, 61, 55)' }}
+        style={{ backgroundColor: 'var(--secondary-bg)' }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="h-full flex flex-col overflow-y-auto">

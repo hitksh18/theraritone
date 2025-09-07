@@ -111,60 +111,60 @@ const ChatWidget: React.FC = () => {
       {/* LUXURY CHAT BUTTON */}
       <button
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full transition-all duration-300 luxury-chat flex items-center space-x-3 luxury-glow"
+        className="fixed bottom-6 right-6 z-40 px-6 py-4 rounded-full transition-all duration-300 luxury-chat flex items-center space-x-3 luxury-glow hover-lift"
       >
         {/* Logo container */}
-        <div className="w-8 h-8 relative rounded-full overflow-hidden flex items-center justify-center border border-[var(--border-color)]">
+        <div className="w-10 h-10 relative rounded-full overflow-hidden flex items-center justify-center border-2 border-[var(--border-color)]">
           <img
             src="/R.png"
             alt="RARITONE Chat"
-            className="w-6 h-6 object-contain"
+            className="w-8 h-8 object-contain"
             style={{
-              maxWidth: '36px',
-              maxHeight: '36px'
+              maxWidth: '40px',
+              maxHeight: '40px'
             }}
           />
         </div>
-        <span className="font-medium text-white">
+        <span className="font-bold text-[var(--text-primary)] text-base">
           Chat with us
         </span>
       </button>
 
       {/* LUXURY CHAT MODAL */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl overflow-hidden luxury-chat transition-all duration-300">
+        <div className="fixed bottom-28 right-6 z-50 w-96 rounded-2xl overflow-hidden luxury-chat transition-all duration-300 shadow-2xl">
           {/* Header */}
-          <div className="text-white p-4 flex items-center justify-between border-b border-[var(--border-color)]">
+          <div className="text-[var(--text-primary)] p-6 flex items-center justify-between border-b-2 border-[var(--border-color)]">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--border-color)]">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center border-2 border-[var(--border-color)]">
                 <img
                   src="/R.png"
                   alt="RARITONE"
-                  className="w-6 h-6 object-contain"
+                  className="w-8 h-8 object-contain"
                   style={{
-                    maxWidth: '36px',
-                    maxHeight: '36px'
+                    maxWidth: '40px',
+                    maxHeight: '40px'
                   }}
                 />
               </div>
-              <span className="font-medium">Chat with a client advisor</span>
+              <span className="font-bold text-base">Chat with a client advisor</span>
             </div>
             
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1 hover:bg-[var(--border-color)] rounded transition-colors"
+                className="p-2 hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] rounded-lg transition-colors"
               >
                 <ChevronDown 
-                  size={16} 
+                  size={20} 
                   className={`transition-transform duration-300 ${isMinimized ? 'rotate-180' : ''}`}
                 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-[var(--border-color)] rounded transition-colors"
+                className="p-2 hover:bg-[var(--accent-color)] hover:text-[var(--main-bg)] rounded-lg transition-colors"
               >
-                <X size={16} />
+                <X size={20} />
               </button>
             </div>
           </div>
