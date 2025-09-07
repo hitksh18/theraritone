@@ -44,7 +44,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsVisible(currentScrollY > 50); // Show immediately after hero
+      setIsVisible(currentScrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -122,6 +122,10 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
     navigate('/');
   };
 
+  const handleSearchClick = () => {
+    navigate('/search');
+  };
+
   const menuItems = [
     { label: 'Shop', path: '/catalog', icon: ShoppingBag },
     { label: 'Body Scan', path: '/scan', icon: Search },
@@ -130,9 +134,9 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
 
   return (
     <>
-      {/* LUXURY NAVBAR */}
+      {/* ENHANCED LUXURY NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 luxury-navbar ${
+        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 luxury-navbar ${
           isHomepage ? (isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0') : 'translate-y-0 opacity-100'
         }`}
         data-menu-container
@@ -140,41 +144,41 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Left - Back Button or Menu */}
-            <div className="flex items-center w-24 sm:w-32">
+            <div className="flex items-center w-32">
               {showBackButton ? (
                 <button
                   onClick={handleBackClick}
-                  className="flex items-center space-x-2 px-4 text-white hover:text-[var(--primary-accent)] transition-colors p-2 rounded-lg min-h-[40px] min-w-[40px]"
+                  className="flex items-center space-x-3 px-4 py-3 text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 rounded-lg"
                 >
-                  <ArrowLeft size={20} color="var(--secondary-accent)" />
-                  {!isMobile && <span className="text-sm font-medium text-white">Back</span>}
+                  <ArrowLeft size={28} className="navbar-icon" />
+                  {!isMobile && <span className="text-base font-medium">Back</span>}
                 </button>
               ) : (
                 <button
                   onClick={handleMenuClick}
-                  className="flex items-center space-x-2 px-4 text-white hover:text-[var(--primary-accent)] transition-colors relative p-2 rounded-lg min-h-[40px] min-w-[40px]"
+                  className="flex items-center space-x-3 px-4 py-3 text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 rounded-lg"
                 >
-                  {/* Hamburger to Cross */}
-                  <div className="relative w-5 h-5 flex flex-col justify-center items-center">
+                  {/* Enhanced Hamburger to Cross */}
+                  <div className="relative w-7 h-7 flex flex-col justify-center items-center">
                     <span
-                      className={`absolute w-4 h-0.5 bg-[var(--secondary-accent)] rounded-full transition-all duration-300 ${
-                        isMenuOpen ? 'rotate-45' : '-translate-y-1'
+                      className={`absolute w-6 h-0.5 bg-[var(--text-primary)] rounded-full transition-all duration-300 ${
+                        isMenuOpen ? 'rotate-45' : '-translate-y-2'
                       }`}
                     />
                     <span
-                      className={`absolute w-4 h-0.5 bg-[var(--secondary-accent)] rounded-full transition-all duration-300 ${
+                      className={`absolute w-6 h-0.5 bg-[var(--text-primary)] rounded-full transition-all duration-300 ${
                         isMenuOpen ? 'opacity-0' : 'opacity-100'
                       }`}
                     />
                     <span
-                      className={`absolute w-4 h-0.5 bg-[var(--secondary-accent)] rounded-full transition-all duration-300 ${
-                        isMenuOpen ? '-rotate-45' : 'translate-y-1'
+                      className={`absolute w-6 h-0.5 bg-[var(--text-primary)] rounded-full transition-all duration-300 ${
+                        isMenuOpen ? '-rotate-45' : 'translate-y-2'
                       }`}
                     />
                   </div>
                   
                   {!isMobile && (
-                    <span className="text-sm font-medium text-white">
+                    <span className="text-base font-medium">
                       {isMenuOpen ? 'Close' : 'Menu'}
                     </span>
                   )}
@@ -182,27 +186,16 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
               )}
             </div>
 
-            {/* Center - Logo or Page Title with Morph Effect */}
-            <div className="flex-1 flex justify-center items-center relative">
+            {/* Center - Logo or Page Title */}
+            <div className="flex-1 flex justify-center items-center">
               {pageTitle ? (
                 <div 
-                  className="relative cursor-pointer flex items-center justify-center h-16 w-full max-w-xs"
+                  className="cursor-pointer flex items-center justify-center"
                   onClick={handleTitleClick}
                 >
-                  <h1 className="navbar-title font-light text-white text-lg sm:text-xl">
+                  <h1 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors duration-300">
                     {pageTitle}
                   </h1>
-                  <img
-                    src="/IMG-20250305-WA0003-removebg-preview.png"
-                    alt="RARITONE"
-                    className="navbar-logo absolute luxury-float"
-                    style={{
-                      height: isMobile ? '48px' : '64px',
-                      width: 'auto',
-                      maxWidth: isMobile ? '200px' : '300px',
-                      objectFit: 'contain'
-                    }}
-                  />
                 </div>
               ) : (
                 <img
@@ -211,31 +204,32 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                   className="cursor-pointer transition-all duration-300 luxury-float"
                   onClick={() => navigate('/')}
                   style={{
-                    height: isMobile ? '48px' : '64px',
+                    height: isMobile ? '56px' : '72px',
                     width: 'auto',
-                    maxWidth: isMobile ? '200px' : '300px',
-                    objectFit: 'contain'
+                    maxWidth: isMobile ? '240px' : '320px',
+                    objectFit: 'contain',
+                    filter: 'brightness(1.2) drop-shadow(0 0 20px rgba(148, 137, 121, 0.3))'
                   }}
                 />
               )}
             </div>
 
-            {/* Right - Action Buttons */}
-            <div className="flex items-center space-x-1 sm:space-x-2 w-24 sm:w-32 justify-end">
+            {/* Right - Enhanced Action Buttons */}
+            <div className="flex items-center space-x-2 w-32 justify-end">
               <button
-                onClick={onSearchOpen}
-                className="text-[var(--secondary-accent)] hover:text-[var(--primary-accent)] transition-colors px-4 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
+                onClick={handleSearchClick}
+                className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 p-3 rounded-lg hover:bg-[var(--secondary-bg)]"
               >
-                <Search size={20} />
+                <Search size={28} className="navbar-icon" />
               </button>
               
               <button 
                 onClick={() => navigate('/wishlist')}
-                className="relative text-[var(--secondary-accent)] hover:text-[var(--primary-accent)] transition-colors px-4 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
+                className="relative text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 p-3 rounded-lg hover:bg-[var(--secondary-bg)]"
               >
-                <Heart size={20} />
+                <Heart size={28} className="navbar-icon" />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[var(--error-color)] text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-[var(--error-color)] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     {wishlistCount}
                   </span>
                 )}
@@ -243,11 +237,11 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
 
               <button
                 onClick={() => navigate('/cart')}
-                className="relative text-[var(--secondary-accent)] hover:text-[var(--primary-accent)] transition-colors px-4 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
+                className="relative text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 p-3 rounded-lg hover:bg-[var(--secondary-bg)]"
               >
-                <ShoppingBag size={20} />
+                <ShoppingBag size={28} className="navbar-icon" />
                 {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[var(--primary-accent)] text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-medium">
+                  <span className="absolute -top-1 -right-1 bg-[var(--accent-color)] text-[var(--main-bg)] text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     {cartItemsCount}
                   </span>
                 )}
@@ -255,30 +249,30 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
               
               <button 
                 onClick={handleProfileClick}
-                className="text-[var(--secondary-accent)] hover:text-[var(--primary-accent)] transition-colors px-4 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
+                className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 p-3 rounded-lg hover:bg-[var(--secondary-bg)]"
               >
-                <User size={20} />
+                <User size={28} className="navbar-icon" />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Menu Dropdown */}
+        {/* Enhanced Menu Dropdown */}
         {isMenuOpen && (
-          <div className="overflow-hidden luxury-card border-t-0 rounded-t-none">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-              <div className="flex justify-center gap-4 sm:gap-8 flex-wrap">
+          <div className="luxury-card border-t-0 rounded-t-none">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="flex justify-center gap-8 flex-wrap">
                 {menuItems.map((item) => (
-                  <div key={item.label} className="transition-all duration-200">
+                  <div key={item.label} className="transition-all duration-300">
                     <button
                       onClick={() => {
                         navigate(item.path);
                         setIsMenuOpen(false);
                       }}
-                      className="w-full text-center text-[var(--text-primary)] hover:text-[var(--primary-accent)] transition-colors flex flex-col items-center px-3 py-4 sm:px-4 sm:py-6 space-y-2 sm:space-y-3 rounded-xl hover:bg-[var(--primary-accent)] hover:bg-opacity-10"
+                      className="text-center text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-all duration-300 flex flex-col items-center px-6 py-4 space-y-3 rounded-xl hover:bg-[var(--accent-color)] hover:bg-opacity-10 hover-lift"
                     >
-                      <item.icon size={22} color="var(--secondary-accent)" />
-                      <span className="font-medium text-xs sm:text-sm text-white">{item.label}</span>
+                      <item.icon size={32} className="navbar-icon" />
+                      <span className="font-semibold text-base">{item.label}</span>
                     </button>
                   </div>
                 ))}
@@ -288,41 +282,41 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
         )}
       </nav>
 
-      {/* Profile Sidebar */}
+      {/* Enhanced Profile Sidebar */}
       {isProfileOpen && user && (
         <>
           <div
-            className="fixed inset-0 z-40 bg-black/60"
+            className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
             onClick={() => setIsProfileOpen(false)}
           />
-          <div className="fixed right-0 top-0 h-full z-50 w-full max-w-sm luxury-card rounded-l-xl transition-none">
-            <div className="p-4 sm:p-6 h-full flex flex-col">
+          <div className="fixed right-0 top-0 h-full z-50 w-full max-w-sm luxury-card rounded-l-xl">
+            <div className="p-6 h-full flex flex-col">
               <div className="flex justify-between items-center mb-8">
-                <h2 className="text-xl sm:text-2xl font-light text-[var(--text-primary)]">
+                <h2 className="text-2xl font-bold text-[var(--text-primary)]">
                   Profile
                 </h2>
                 <button
                   onClick={() => setIsProfileOpen(false)}
-                  className="text-[var(--text-primary)] hover:text-[var(--primary-accent)] transition-colors p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
+                  className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors p-2 rounded-lg"
                 >
-                  <X size={22} />
+                  <X size={28} />
                 </button>
               </div>
 
               <div className="mb-8">
-                <div className="flex items-center space-x-3 sm:space-x-4 mb-6">
-                  <div className="luxury-card rounded-full flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="luxury-card rounded-full flex items-center justify-center w-16 h-16">
                     {user?.photoURL ? (
                       <img src={user.photoURL} alt="Profile" className="w-full h-full rounded-full object-cover" />
                     ) : (
-                      <User size={22} className="text-[var(--text-primary)]" />
+                      <User size={28} className="text-[var(--text-primary)]" />
                     )}
                   </div>
                   <div>
-                    <h3 className="font-medium text-[var(--text-primary)] text-base sm:text-lg">
+                    <h3 className="font-bold text-[var(--text-primary)] text-lg">
                       {user.displayName || 'User'}
                     </h3>
-                    <p className="text-[var(--secondary-accent)] text-sm sm:text-base">
+                    <p className="text-[var(--accent-color)] text-base">
                       {user.email}
                     </p>
                   </div>
@@ -334,14 +328,14 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                   { label: 'Profile Info', path: '/profile' },
                   { label: 'Order History', path: '/orders' },
                   { label: 'Saved Items', path: '/wishlist' },
-                ].map((action, index) => (
+                ].map((action) => (
                   <button
                     key={action.label}
                     onClick={() => {
                       navigate(action.path);
                       setIsProfileOpen(false);
                     }}
-                    className="w-full text-left text-[var(--text-primary)] luxury-card rounded-xl transition-all duration-200 hover:bg-[var(--primary-accent)] hover:bg-opacity-10 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base"
+                    className="w-full text-left text-[var(--text-primary)] luxury-card rounded-xl transition-all duration-300 hover:bg-[var(--accent-color)] hover:bg-opacity-20 hover-lift px-4 py-3 text-base font-medium"
                   >
                     {action.label}
                   </button>
@@ -352,7 +346,7 @@ const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen, pageTitl
                     logout();
                     setIsProfileOpen(false);
                   }}
-                  className="w-full text-left text-[var(--error-color)] hover:bg-red-900/20 border border-[var(--error-color)] rounded-xl transition-all duration-200 px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base"
+                  className="w-full text-left text-[var(--error-color)] hover:bg-red-900/20 border-2 border-[var(--error-color)] rounded-xl transition-all duration-300 px-4 py-3 text-base font-medium"
                 >
                   Logout
                 </button>
